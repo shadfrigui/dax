@@ -1,0 +1,16 @@
+Day 9.1 =
+-- What is the average sale per transaction for "Romero y Tomillo"?
+VAR __SalesPerCustomerNamePerOrder =
+    ADDCOLUMNS (
+        SUMMARIZE ( Orders, Customers[CompanyName], Orders[OrderID] ),
+        "@Sales", CALCULATE ( [Total Sales] )
+    )
+VAR __RomeroOrders =
+    FILTER (
+        __SalesPerCustomerNamePerOrder,
+        Customers[CompanyName] = "Romero y Tomillo"
+    )
+VAR __RomeroAverageSalePerOrder =
+    AVERAGEX ( __RomeroOrders, [@Sales] )
+RETURN
+    __RomeroAverageSalePerOrder

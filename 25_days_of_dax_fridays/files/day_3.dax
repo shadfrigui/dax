@@ -1,0 +1,3 @@
+Day 3 =
+-- What is the average unit price for our products?
+AVERAGEX ( Products, Products[UnitPrice] )

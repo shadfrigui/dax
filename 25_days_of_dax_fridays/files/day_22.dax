@@ -1,0 +1,18 @@
+Day 22 =
+-- How many employees are 60-years-old or over?
+VAR __EmployeesSixtyOrOver =                       -- I avoided calculating employees' age by dividing by 365 or 365.25 
+    FILTER (                                       -- and used IF functions instead. The __EmployeesSixtyOrOver variable
+        Employees,                                 -- returns employees that are 60 or over. It does not return employees 
+        IF (                                       -- that are still below 60, even by 1 day.
+            DATEDIFF ( Employees[BirthDate], TODAY (), YEAR ) >= 60,
+            IF (
+                MONTH ( Employees[BirthDate] ) < MONTH ( TODAY () ),
+                TRUE,
+                IF ( DAY ( Employees[BirthDate] ) <= DAY ( TODAY () ), TRUE )
+            )
+        )
+    )
+VAR __NumEmployeesSixtyOrOver =
+    CALCULATE ( COUNTROWS ( Employees ), __EmployeesSixtyOrOver )
+RETURN
+    __NumEmployeesSixtyOrOver

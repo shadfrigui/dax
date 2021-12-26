@@ -1,0 +1,14 @@
+Day 16.2 =
+-- Which products are out of stock (including discontinued products)?
+VAR __OutOfStockProducts =
+    FILTER ( Products, Products[UnitsInStock] = 0 )
+VAR __OutOfStockProductNames =
+    CONCATENATEX (
+        __OutOfStockProducts,
+        Products[ProductName],
+        "
+",
+        Products[ProductName], ASC
+    )
+RETURN
+    __OutOfStockProductNames

@@ -1,0 +1,10 @@
+Day 21 =
+-- What is the percentage of female employees?
+VAR __NumFemaleEmployees =
+    CALCULATE ( COUNTROWS ( Employees ), Employees[Gender] = "Female" )
+VAR __NumAllEmployees =
+    COUNTROWS ( Employees )
+VAR __PercentFemaleEmployees =
+    DIVIDE ( __NumFemaleEmployees, __NumAllEmployees )
+RETURN
+    __PercentFemaleEmployees

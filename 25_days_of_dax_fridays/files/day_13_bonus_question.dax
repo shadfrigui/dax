@@ -1,0 +1,23 @@
+Day 13.2 =
+-- Which customers we lost in the current year? 
+VAR __LastPurchasePerCustomerName =
+    ADDCOLUMNS (
+        SUMMARIZE ( Orders, Customers[CompanyName] ),
+        "@Last Purchase", CALCULATE ( LASTDATE ( Orders[OrderDate] ) )
+    )
+VAR __CurrentYearLostCustomers =
+    FILTER (
+        __LastPurchasePerCustomerName,
+        NOT ( ISBLANK ( [@Last Purchase] ) )
+            && YEAR ( [@Last Purchase] ) < [Current Year]
+    )
+VAR __CurrentYearLostCustomersNames =
+    CONCATENATEX (
+        __CurrentYearLostCustomers,
+        Customers[CompanyName],
+        "
+",
+        Customers[CompanyName], ASC
+    )
+RETURN
+    __CurrentYearLostCustomersNames

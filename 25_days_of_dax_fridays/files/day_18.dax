@@ -1,0 +1,7 @@
+Day 18 = 
+-- How many products have stocked units less than ordered units?
+CALCULATE (
+    COUNTROWS ( Products ),
+    Products[UnitsInStock] < Products[UnitsOnOrder]
+        && Products[Discontinued] = FALSE()
+)

@@ -1,0 +1,6 @@
+Day 19.1 = 
+-- What is the value of in-stock discontinued products?
+CALCULATE (
+    SUMX ( Products, Products[UnitsInStock] * Products[UnitPrice] ),
+    Products[Discontinued] = TRUE()
+)

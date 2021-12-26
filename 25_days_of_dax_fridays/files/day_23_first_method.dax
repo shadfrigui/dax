@@ -1,0 +1,22 @@
+Day 23.1 =
+-- Which employee had the highest sales in 2021?
+VAR __2021SalesPerEmployee =
+    CALCULATETABLE (
+        ADDCOLUMNS (
+            SUMMARIZE ( Orders, Orders[EmployeeID], Employees[Full Name] ),
+            "@Sales", CALCULATE ( [Total Sales] )
+        ),
+        'Calendar'[Year] = 2021
+    )
+VAR __2021HighestSalesEmployees =
+    TOPN ( 1, __2021SalesPerEmployee, [@Sales], DESC )
+VAR __2021HighestSalesEmployeesNames =
+    CONCATENATEX (
+        __2021HighestSalesEmployees,
+        Employees[Full Name],
+        "
+",
+        Employees[Full Name], ASC
+    )
+RETURN
+    __2021HighestSalesEmployeesNames

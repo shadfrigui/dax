@@ -1,0 +1,18 @@
+Day 17.2 =
+-- Which Products need to be restocked?
+VAR __NeedRestockProducts =
+    FILTER (
+        Products,
+        Products[UnitsInStock] + Products[UnitsOnOrder] <= Products[ReorderLevel]
+            && Products[Discontinued] = FALSE ()
+    )
+VAR __NeedReStockProductNames =
+    CONCATENATEX (
+        __NeedRestockProducts,
+        Products[ProductName],
+        "
+",
+        Products[ProductName], ASC
+    )
+RETURN
+    __NeedReStockProductNames

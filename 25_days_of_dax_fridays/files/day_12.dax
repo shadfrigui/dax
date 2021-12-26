@@ -1,0 +1,16 @@
+Day 12 =
+-- How many new customers are in the current year?
+VAR __FirstPurchasePerCustomer =
+    ADDCOLUMNS (
+        SUMMARIZE ( Orders, Orders[CustomerID] ),
+        "@First Purchase", CALCULATE ( FIRSTDATE ( Orders[OrderDate] ) )
+    )
+VAR __CurrentYearNewCustomers =
+    FILTER (
+        __FirstPurchasePerCustomer,
+        YEAR ( [@First Purchase] ) = [Current Year]
+    )
+VAR __NumCurrentYearNewCustomers =
+    COUNTROWS ( __CurrentYearNewCustomers )
+RETURN
+    __NumCurrentYearNewCustomers

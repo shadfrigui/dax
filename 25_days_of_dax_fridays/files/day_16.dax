@@ -1,0 +1,6 @@
+Day 16.1 = 
+-- How many products are out of stock (including discontinued products)?
+CALCULATE (
+    COUNTROWS ( Products ),
+    Products[UnitsInStock] = 0
+)

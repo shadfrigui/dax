@@ -1,0 +1,7 @@
+Day 1 =
+-- How many current products cost less than $20?
+CALCULATE (
+    COUNTROWS ( Products ),
+    Products[Discontinued] = FALSE ()
+    	&& Products[UnitPrice] < 20
+)

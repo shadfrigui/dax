@@ -1,0 +1,28 @@
+Day 2 =
+-- Which product is the most/least expensive?
+-- The following code returns both most and least expensive products and handles ties.
+VAR __MostExpensiveProducts =
+    TOPN ( 1, Products, Products[UnitPrice], DESC )
+VAR __MostExpensiveProductNames =
+    CONCATENATEX (
+        __MostExpensiveProducts,
+        Products[ProductName],
+        ", ",
+        Products[ProductName], ASC
+    )
+VAR __LeastExpensiveProducts =
+    TOPN ( 1, Products, Products[UnitPrice], ASC )
+VAR __LeastExpensiveProductNames =
+    CONCATENATEX (
+        __LeastExpensiveProducts,
+        Products[ProductName],
+        ", ",
+        Products[ProductName], ASC
+    )
+VAR __Result = 
+    -- The following delimiter (open quote + Press Enter to start on a new line + close quote")
+    -- ensures that least expensive products starts on a new line.
+    "Most Expensive Products: "  & __MostExpensiveProductNames & "
+" & "Least Expensive Products: " & __LeastExpensiveProductNames
+RETURN
+    __Result

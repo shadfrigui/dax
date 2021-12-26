@@ -1,0 +1,14 @@
+Day 15.1 =
+-- How many customers have purchased only Queso Cabrales on a given order?
+VAR __TempTable =
+    ADDCOLUMNS (
+        SUMMARIZE ( Orders, Orders[CustomerID], Orders[OrderID] ),
+        "@Number of Distinct Products", CALCULATE ( COUNT ( Orders[ProductID] ) ),
+        "@Product ID", CALCULATE ( SELECTEDVALUE ( Orders[ProductID] ) )
+    )
+VAR __BoughtOnlyQCCustomers =
+    FILTER ( __TempTable, [@Number of Distinct Products] = 1 && [@Product ID] = 11 )
+VAR __NumCustomersBoughtOnlyQC =
+    COUNTROWS ( __BoughtOnlyQCCustomers )
+RETURN
+    __NumCustomersBoughtOnlyQC

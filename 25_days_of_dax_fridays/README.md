@@ -1,0 +1,1 @@
+The 25 days of DAX Fridays challenge is a Curbal initiative that consists of solving 25 DAX questions.

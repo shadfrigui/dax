@@ -1,0 +1,6 @@
+Day 25 = 
+-- How many employees got hired in 1994?
+CALCULATE (
+    COUNTROWS ( Employees ),
+    YEAR ( Employees[HireDate] ) = 1994
+)

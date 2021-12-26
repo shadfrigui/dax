@@ -1,0 +1,17 @@
+Day 13.1 =
+-- How many lost customers are in the current year?
+VAR __LastPurchasePerCustomer =
+    ADDCOLUMNS (
+        SUMMARIZE ( Orders, Orders[CustomerID] ),
+        "@Last Purchase", CALCULATE ( LASTDATE ( Orders[OrderDate] ) )
+    )
+VAR __CurrentYearLostCustomers =
+    FILTER (
+        __LastPurchasePerCustomer,
+        NOT ( ISBLANK ( [@Last Purchase] ) )
+            && YEAR ( [@Last Purchase] ) < [Current Year]
+    )
+VAR __NumCurrentYearLostCustomers =
+    COUNTROWS ( __CurrentYearLostCustomers )
+RETURN
+    __NumCurrentYearLostCustomers

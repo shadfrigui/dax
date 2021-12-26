@@ -1,0 +1,21 @@
+Day 20 =
+-- Which vendor has the highest in-stock value?
+VAR __InStockValueperSupplier =
+    SELECTCOLUMNS (
+        Suppliers,
+        "@Supplier ID", Suppliers[SupplierID],
+        "@Supplier Name", Suppliers[CompanyName],
+        "@In-Stock Value", CALCULATE ( SUMX ( Products, Products[UnitsInStock] * Products[UnitPrice] ) )
+    )
+VAR __HighestInStockValueSuppliers =
+    TOPN ( 1, __InStockValueperSupplier, [@In-Stock Value], DESC )
+VAR __HighestInStockValueSupplierNames =
+    CONCATENATEX (
+        __HighestInStockValueSuppliers,
+        [@Supplier Name],
+        "
+",
+        [@Supplier Name], ASC
+    )
+RETURN
+    __HighestInStockValueSupplierNames

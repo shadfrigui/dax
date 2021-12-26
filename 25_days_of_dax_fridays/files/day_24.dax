@@ -1,0 +1,13 @@
+Day 24.1 = 
+-- How many employees sold over $100K in 2021?
+VAR __2021SalesPerEmployee =
+    ADDCOLUMNS (
+        SUMMARIZE ( Orders, Orders[EmployeeID], Employees[Full Name] ),
+        "@Sales", CALCULATE ( [Total Sales], 'Calendar'[Year] = 2021 )
+    )
+VAR __Over100KEmployees =
+    FILTER ( __2021SalesPerEmployee, [@Sales] > 100000 )
+VAR __NumOver100KEmployees =
+    COUNTROWS ( __Over100KEmployees )
+RETURN
+    __NumOver100KEmployees

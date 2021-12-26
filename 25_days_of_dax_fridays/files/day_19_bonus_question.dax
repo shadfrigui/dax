@@ -1,0 +1,26 @@
+Day 19.2 = 
+-- What are the values of in-stock and on-order current and discontinued products?
+VAR __InStockCurrentProductsValue =
+    CALCULATE (
+        SUMX ( Products, Products[UnitsInStock] * Products[UnitPrice] ),
+        Products[Discontinued] = FALSE()
+    )
+VAR __OnOrderCurrentProductsValue =
+    CALCULATE (
+        SUMX ( Products, Products[UnitsOnOrder] * Products[UnitPrice] ),
+        Products[Discontinued] = FALSE()
+    )
+VAR __InStockDiscontinuedProductsValue =
+    CALCULATE (
+        SUMX ( Products, Products[UnitsInStock] * Products[UnitPrice] ),
+        Products[Discontinued] = TRUE()
+    )
+VAR __AllProductsValue =
+    SUMX ( Products, ( Products[UnitsInStock] + Products[UnitsOnOrder] ) * Products[UnitPrice] )
+VAR __Result =
+        "Current In-Stock:              "      & FORMAT ( __InStockCurrentProductsValue, "Currency" )      & "
+" &     "Current On-Order:            "        & FORMAT ( __OnOrderCurrentProductsValue, "Currency" )      & "
+" &     "Discontinued In-Stock:       "        & FORMAT ( __InStockDiscontinuedProductsValue, "Currency" ) & "
+" &     "All Products:                      "  & FORMAT ( __AllProductsValue, "Currency" )
+RETURN
+    __Result

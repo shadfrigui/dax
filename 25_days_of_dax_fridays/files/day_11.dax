@@ -1,0 +1,13 @@
+Day 11.1 =
+-- How many customers have ordered only once?
+VAR __NumOrdersPerCustomer =
+    ADDCOLUMNS (
+        SUMMARIZE ( Orders, Orders[CustomerID] ),
+        "@Number of Orders", CALCULATE ( DISTINCTCOUNT ( Orders[OrderID] ) )
+    )
+VAR __SingleOrderCustomers =
+    FILTER ( __NumOrdersPerCustomer, [@Number of Orders] = 1 )
+VAR __NumSingleOrderCustomers =
+    COUNTROWS ( __SingleOrderCustomers )
+RETURN
+    __NumSingleOrderCustomers

@@ -1,0 +1,12 @@
+Day 14 =
+-- How many customers have never purchased Queso Cabrales?
+VAR __NumAllCustomers =
+    COUNTROWS ( Customers )
+VAR __NumCustomersBoughtQC =
+    CALCULATE (
+        DISTINCTCOUNT ( Orders[CustomerID] ),
+        Products[ProductName] = "Queso Cabrales"
+    )
+VAR __NumCustomersNeverBoughtQC = __NumAllCustomers - __NumCustomersBoughtQC
+RETURN
+    __NumCustomersNeverBoughtQC

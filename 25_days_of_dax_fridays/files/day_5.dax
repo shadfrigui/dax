@@ -1,0 +1,7 @@
+Day 5 =
+-- How many products cost between $15 and $25 inclusive?
+CALCULATE (
+    COUNTROWS ( Products ),
+    Products[UnitPrice] >= 15
+        && Products[UnitPrice] <= 25
+)

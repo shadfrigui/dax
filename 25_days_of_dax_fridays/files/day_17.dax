@@ -1,0 +1,7 @@
+Day 17.1 = 
+-- How many products need to be restocked?
+CALCULATE (
+    COUNTROWS ( Products ),
+    Products[UnitsInStock] + Products[UnitsOnOrder] <= Products[ReorderLevel] -- UnitsOnOrder represents orders from 
+        && Products[Discontinued] = FALSE()                                   -- suppliers, not orders committed to
+)                                                                             -- customers. It must be added.

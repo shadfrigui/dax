@@ -1,0 +1,6 @@
+Day 9.3 = 
+-- What is the average sale per transaction for "Romero y Tomillo"?
+CALCULATE (
+    AVERAGEX ( VALUES ( Orders[OrderID] ), [Total Sales] ),
+    Customers[CompanyName] = "Romero y Tomillo"
+)

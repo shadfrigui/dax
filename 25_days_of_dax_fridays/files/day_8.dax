@@ -1,0 +1,13 @@
+Day 8 =
+-- How many orders are "single item" (only one product ordered)?
+VAR __NumProductsPerOrder =
+    ADDCOLUMNS (
+        SUMMARIZE ( Orders, Orders[OrderID] ),
+        "@Number of Distinct Products", CALCULATE ( COUNT ( Orders[ProductID] ) )
+    )
+VAR __SingleItemOrders =
+    FILTER ( __NumProductsPerOrder, [@Number of Distinct Products] = 1 )
+VAR __NumSingleItemOrders =
+    COUNTROWS ( __SingleItemOrders )
+RETURN
+    __NumSingleItemOrders

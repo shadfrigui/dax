@@ -1,0 +1,11 @@
+Day 6.1 =
+-- What is the average number of different products per order?
+VAR __NumProductsPerOrder =
+    ADDCOLUMNS (                               -- New columns are computed in the row context of ADDCOLUMNS. So we need 
+        SUMMARIZE ( Orders, Orders[OrderID] ), -- to invoke context transition to generate a filter context by wrapping
+        "@Number of Distinct Products", CALCULATE ( COUNT ( Orders[ProductID] ) ) -- the expression with CALCULATE.
+    )
+VAR __AverageNumProductsPerOrder =
+    AVERAGEX ( __NumProductsPerOrder, [@Number of Distinct Products] )
+RETURN
+    __AverageNumProductsPerOrder

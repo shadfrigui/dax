@@ -1,0 +1,11 @@
+Day 10 =
+-- How many days since "North/South" last purchase?
+VAR __NSLastPurchase =
+    CALCULATE (
+        LASTDATE ( Orders[OrderDate] ),
+        Customers[CompanyName] = "North/South"
+    )
+VAR __DaysSinceNSLastPurchase =
+    DATEDIFF ( __NSLastPurchase, TODAY (), DAY )
+RETURN
+    __DaysSinceNSLastPurchase

@@ -1,0 +1,10 @@
+Day 4 =
+-- How many products are above the average unit price?
+VAR __AverageUnitPrice = [Day 3]
+VAR __Result =
+    CALCULATE ( 
+        COUNTROWS ( Products ), 
+        Products[UnitPrice] > __AverageUnitPrice
+    )
+RETURN
+    __Result
