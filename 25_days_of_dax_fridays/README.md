@@ -5,7 +5,7 @@ The 25 days of DAX Fridays challenge is a Curbal initiative that consists of sol
 
 
 ## Notes
-- I used a double underscore prefix for variables and the CamelCase naming convention. I used long variable names (but no more than 35 characters) to make sure they’re meaningful. 
+- I used a double underscore prefix for variables and the PascalCase naming convention. I used long variable names (but no more than 35 characters) to make sure they’re meaningful. 
 - Whenever a question/bonus question (I added some bonus questions) asks for an answer of type text, I used CONCATENATEX to return ties if they’re present.
 - All the answers return the desired value(s) on a card visual.
 - The dataset is a live dataset. Your answers might be different from my answers in the images below.
